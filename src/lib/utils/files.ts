@@ -1,5 +1,3 @@
-'use client'
-
 import { open, save } from '@tauri-apps/api/dialog'
 import { readBinaryFile } from '@tauri-apps/api/fs'
 
