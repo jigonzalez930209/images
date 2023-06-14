@@ -13,12 +13,16 @@ export interface IImagesState {
   files: IImage[]
   platform: IPlatform
   selectedFile: IImage['id'][]
+  progress: number
+  columns: number
 }
 
 export type IPlatform = 'web' | 'desktop' | null
 
 export interface IImage {
-  id: number
+  id: string
   name: string
-  image: Blob
+  image: string
 }
+
+export type ImagesAcceptedTypes = '.png' | '.jpeg' | '.tiff' | '.bmp' | '.tif' | '.jpg'
