@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { IImage, IImagesState, INotification, IPlatform } from '../interfaces'
 import { ImagesContext } from './ImageContext'
-import { graftReducer } from './imagesReducer'
+import { imagesReducer } from './imagesReducer'
 
 export const INITIAL_STATE: IImagesState = {
   notifications: {
@@ -14,6 +14,8 @@ export const INITIAL_STATE: IImagesState = {
   drawerOpen: false,
   selectedFile: [],
   loading: false,
+  progress: 0,
+  columns: 0,
 }
 
 interface props {
@@ -21,8 +23,8 @@ interface props {
   initialState: IImagesState
 }
 
-export const GraftProvider = ({ children, initialState }: props) => {
-  const [imagesState, dispatch] = React.useReducer(graftReducer, initialState)
+export const ImagesProvider = ({ children, initialState }: props) => {
+  const [imagesState, dispatch] = React.useReducer(imagesReducer, initialState)
 
   const setNotification = (notification: INotification) =>
     dispatch({ type: 'setNotification', payload: notification })
@@ -40,10 +42,17 @@ export const GraftProvider = ({ children, initialState }: props) => {
 
   const addFiles = (files: IImage[]) => dispatch({ type: 'addFiles', payload: files })
 
-  const setSelectedFile = (selectedFile: IImage['id'][]) =>
-    dispatch({ type: 'setSelectedFile', payload: selectedFile })
+  // const setSelectedFile = (selectedFile: IImage['id'][]) =>
+  //   dispatch({ type: 'setSelectedFile', payload: selectedFile })
 
   const setPlatform = (platform: IPlatform) => dispatch({ type: 'setPlatform', payload: platform })
+
+  const setProgress = (progress: number) => dispatch({ type: 'setProgress', payload: progress })
+
+  const setLoading = (loading: boolean) => dispatch({ type: 'setLoading', payload: loading })
+
+  const setColumns = (columns: number) => dispatch({ type: 'setColumns', payload: columns })
+
   React.useEffect(() => {
     setImagesState(initialState)
   }, [initialState])
@@ -57,9 +66,12 @@ export const GraftProvider = ({ children, initialState }: props) => {
         addFile,
         addFiles,
         setNotification,
-        setSelectedFile,
+        setColumns,
+        // setSelectedFile,
         setDrawerOpen,
         setPlatform,
+        setProgress,
+        setLoading,
       }}
     >
       {children}

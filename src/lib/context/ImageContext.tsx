@@ -8,9 +8,12 @@ export type ImagesContextProps = {
   addFile: (file: IImage) => void
   addFiles: (files: IImage[]) => void
   setNotification: (notification: INotification) => void
-  setSelectedFile: (selectedFileType: IImage['id'][]) => void
+  // setSelectedFile: (selectedFileType: IImage['id'][]) => void
   setDrawerOpen: (open: boolean) => void
   setPlatform: (platform: IPlatform) => void
+  setProgress: (progress: number) => void
+  setLoading: (loading: boolean) => void
+  setColumns: (columns: number) => void
 }
 
 export const ImagesContext = React.createContext<ImagesContextProps>({} as ImagesContextProps)

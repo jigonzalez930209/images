@@ -11,11 +11,14 @@ type ImagesAction = {
     | 'addFiles'
     | 'addFile'
     | 'setSelectedFile'
+    | 'setProgress'
+    | 'setLoading'
+    | 'setColumns'
 
   payload: INotification | boolean | IPlatform | IImage | IImage[] | number | number[] | IImagesState
 }
 
-export const graftReducer = (state: IImagesState, action: ImagesAction): IImagesState => {
+export const imagesReducer = (state: IImagesState, action: ImagesAction): IImagesState => {
   switch (action.type) {
     case 'setNotification':
       return {
@@ -67,14 +70,35 @@ export const graftReducer = (state: IImagesState, action: ImagesAction): IImages
         files: [...state.files, file],
       }
     }
-    case 'setSelectedFile': {
-      const id = action.payload as number
-      const files = state.files.map(f => ({ ...f, selected: f.id === id }))
+    // case 'setSelectedFile': {
+    //   const id = action.payload as number
+    //   const files = state.files.map(f => ({ ...f, selected: f.id === id }))
+    //   return {
+    //     ...state,
+    //     files,
+    //   }
+    // }
+
+    case 'setColumns': {
       return {
         ...state,
-        files,
+        columns: action.payload as number,
       }
     }
+
+    case 'setProgress': {
+      return {
+        ...state,
+        progress: action.payload as number,
+      }
+    }
+
+    case 'setLoading':
+      return {
+        ...state,
+        progress: 0,
+        loading: action.payload as boolean,
+      }
 
     default:
       return state
