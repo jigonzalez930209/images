@@ -1,19 +1,18 @@
 import { Icons } from './icons'
-import { Button } from './ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
+import { Button } from '../ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import {
   MenubarContent,
   MenubarMenu,
   MenubarRadioGroup,
   MenubarRadioItem,
   MenubarTrigger,
-} from './ui/menubar'
+} from '../ui/menubar'
 import { useTheme } from 'next-themes'
 import * as React from 'react'
 
 export function MenuModeToggle() {
-  const { setTheme, theme, themes, forcedTheme, resolvedTheme, systemTheme } = useTheme()
-  console.log({ theme, themes, forcedTheme, resolvedTheme, systemTheme })
+  const { setTheme, theme } = useTheme()
 
   return (
     <MenubarMenu>
