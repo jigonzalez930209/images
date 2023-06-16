@@ -45,7 +45,7 @@ export function Menu() {
   }, [])
 
   return (
-    <Menubar className='w-full rounded-none border-b border-none pl-2 lg:pl-3'>
+    <Menubar className='z-50 w-full rounded-none border-b pl-2 lg:pl-3'>
       <MenubarMenu>
         <div className='inline-flex h-fit w-fit items-center text-cyan-500'>
           <FileImage className='h-5 w-5' />
