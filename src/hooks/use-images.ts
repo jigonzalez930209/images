@@ -41,7 +41,6 @@ const useImages = () => {
     setFiles(images)
     setLoading(false)
     e.target.value = null
-    console.log(images)
   }
 
   const addImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,10 +57,9 @@ const useImages = () => {
         image: image2canvas(tiffArrayBufferToImageData(imgs)).toDataURL(),
         name: files[0].name,
       }
-              
-       addFile(img)
-    }
 
+      addFile(img)
+    }
 
     console.log(Date.now() - s, 'ms all time')
 
