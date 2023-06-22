@@ -15,7 +15,8 @@ export const INITIAL_STATE: IImagesState = {
   selectedFile: [],
   loading: false,
   progress: 0,
-  columns: 0,
+  columns: 2,
+  imageDialog: null,
 }
 
 interface props {
@@ -53,6 +54,8 @@ export const ImagesProvider = ({ children, initialState }: props) => {
 
   const setColumns = (columns: number) => dispatch({ type: 'setColumns', payload: columns })
 
+  const setImageDialog = (image: IImage) => dispatch({ type: 'setImageDialog', payload: image })
+
   React.useEffect(() => {
     setImagesState(initialState)
   }, [initialState])
@@ -68,6 +71,7 @@ export const ImagesProvider = ({ children, initialState }: props) => {
         setNotification,
         setColumns,
         // setSelectedFile,
+        setImageDialog,
         setDrawerOpen,
         setPlatform,
         setProgress,

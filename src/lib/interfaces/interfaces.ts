@@ -15,6 +15,7 @@ export interface IImagesState {
   selectedFile: IImage['id'][]
   progress: number
   columns: number
+  imageDialog: IImage | null
 }
 
 export type IPlatform = 'web' | 'desktop' | null

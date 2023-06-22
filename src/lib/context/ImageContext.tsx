@@ -9,6 +9,7 @@ export type ImagesContextProps = {
   addFiles: (files: IImage[]) => void
   setNotification: (notification: INotification) => void
   // setSelectedFile: (selectedFileType: IImage['id'][]) => void
+  setImageDialog: (image: IImage) => void
   setDrawerOpen: (open: boolean) => void
   setPlatform: (platform: IPlatform) => void
   setProgress: (progress: number) => void

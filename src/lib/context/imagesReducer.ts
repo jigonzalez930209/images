@@ -14,8 +14,9 @@ type ImagesAction = {
     | 'setProgress'
     | 'setLoading'
     | 'setColumns'
+    | 'setImageDialog'
 
-  payload: INotification | boolean | IPlatform | IImage | IImage[] | number | number[] | IImagesState
+  payload: INotification | boolean | IPlatform | IImage | IImage[] | number | number[] | IImagesState | null
 }
 
 export const imagesReducer = (state: IImagesState, action: ImagesAction): IImagesState => {
@@ -100,6 +101,11 @@ export const imagesReducer = (state: IImagesState, action: ImagesAction): IImage
         loading: action.payload as boolean,
       }
 
+    case 'setImageDialog':
+      return {
+        ...state,
+        imageDialog: action.payload as IImage | null,
+      }
     default:
       return state
   }
