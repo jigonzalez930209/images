@@ -1,22 +1,24 @@
-import { forwardRef, HTMLAttributes, CSSProperties, useState } from 'react'
+import { forwardRef, HTMLAttributes, CSSProperties, useState, useContext } from 'react'
 import { DraggableAttributes } from '@dnd-kit/core'
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities'
 import { GripVertical } from 'lucide-react'
 
 import { IImage } from 'src/lib/interfaces'
 import { Button } from 'src/ui/button'
+import { ImagesContext } from 'src/lib/context/ImageContext'
 
-export type ItemProps = HTMLAttributes<HTMLDivElement> &
-  IImage & {
-    withOpacity?: boolean
-    isDragging?: boolean
-    attributes?: DraggableAttributes
-    listeners?: SyntheticListenerMap
-  }
+export type ItemProps = HTMLAttributes<HTMLDivElement> & {
+  image: IImage
+  withOpacity?: boolean
+  isDragging?: boolean
+  attributes?: DraggableAttributes
+  listeners?: SyntheticListenerMap
+}
 
 const Item = forwardRef<HTMLDivElement, ItemProps>(
-  ({ id, withOpacity, isDragging, style, listeners, attributes, ...props }, ref) => {
+  ({ id, withOpacity, isDragging, style, listeners, attributes, image, ...props }, ref) => {
     const [showHandles, setShowHandles] = useState(false)
+    const { setImageDialog } = useContext(ImagesContext)
 
     const inlineStyles: CSSProperties = {
       opacity: withOpacity ? '0.5' : '1',
@@ -57,8 +59,13 @@ const Item = forwardRef<HTMLDivElement, ItemProps>(
             </Button>
           </div>
         )}
-        <img src={props.image} alt={props.name} className='h-fit w-full rounded-sm object-cover' />
-        <div>{props.name}</div>
+        <img
+          src={image.image}
+          alt={image.name}
+          className='h-fit w-full rounded-sm object-cover'
+          onClick={() => setImageDialog(image)}
+        />
+        <div>{image.name}</div>
       </div>
     )
   }

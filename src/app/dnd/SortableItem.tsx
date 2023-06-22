@@ -6,7 +6,7 @@ import Item, { ItemProps } from './Item'
 
 const SortableItem: FC<ItemProps> = props => {
   const { isDragging, attributes, listeners, setNodeRef, transform, transition } = useSortable({
-    id: props.id,
+    id: props.image.id,
   })
 
   const style = {

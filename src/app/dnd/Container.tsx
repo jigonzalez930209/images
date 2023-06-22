@@ -1,4 +1,4 @@
-import {useState, useCallback, useContext } from 'react'
+import { useState, useCallback, useContext } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -73,12 +73,12 @@ const Container = () => {
             )}
           >
             {images?.map(img => (
-              <SortableItem key={img?.id} {...img} />
+              <SortableItem key={img?.id} image={img} />
             ))}
           </div>
         </SortableContext>
         <DragOverlay adjustScale style={{ transformOrigin: '0 0 ' }}>
-          {activeId?.id ? <Item {...activeId} isDragging /> : null}
+          {activeId?.id ? <Item image={activeId} isDragging /> : null}
         </DragOverlay>
       </DndContext>
     )
