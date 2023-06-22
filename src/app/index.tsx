@@ -7,6 +7,7 @@ import { Menu } from '../support/menu'
 import useLoading from '../hooks/use-loading'
 import useProgress from '../hooks/use-progress'
 import Container from './dnd/Container'
+import DialogViewer from './viewer/DialogViewer'
 
 const App = () => {
   const { progress } = useProgress()
@@ -25,8 +26,9 @@ const App = () => {
           <Menu />
           <InputsRef />
         </RefProvider>
+        <DialogViewer />
       </header>
-      <main className='h-[93vh] overflow-auto border-t bg-background pb-8 scrollbar scrollbar-track-transparent scrollbar-thumb-accent scrollbar-thumb-rounded-md'>
+      <main className='h-[93vh]  overflow-auto border-t bg-background pb-8 opacity-100 scrollbar scrollbar-track-transparent scrollbar-thumb-accent scrollbar-thumb-rounded-md'>
         <Container />
       </main>
     </div>
