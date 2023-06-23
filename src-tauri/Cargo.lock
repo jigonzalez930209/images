@@ -1284,8 +1284,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "images-vite"
-version = "0.0.1"
+name = "images"
+version = "0.1.0"
 dependencies = [
  "serde",
  "serde_json",
