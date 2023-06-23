@@ -1,6 +1,7 @@
 import { ImagesAcceptedTypes } from '../interfaces/interfaces'
 
 export const ALL_ACCEPTED_EXT: ImagesAcceptedTypes[] = ['.jpg', '.png', '.tif', '.tiff', '.jpeg', '.bmp']
+export const ESPECIAL_ACCEPTED_EXT: ImagesAcceptedTypes[] = ['.tif', '.tiff']
 
 export const ImagesGridColumns = {
   '0': 'grid-cols-1',

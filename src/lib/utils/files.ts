@@ -1,6 +1,8 @@
 import { open, save } from '@tauri-apps/plugin-dialog'
 import { readBinaryFile, readTextFile } from '@tauri-apps/plugin-fs'
 import UTIF from 'utif'
+import { ALL_ACCEPTED_EXT, ESPECIAL_ACCEPTED_EXT } from './const'
+import { ImagesAcceptedTypes } from '../interfaces/interfaces'
 
 const readFilesUsingTauriProcess = async () => {
   const selected = await open({
@@ -61,7 +63,17 @@ const readAllFiles = async (files: string[]) => {
   })
 }
 
-const bulkPromise = async (i: number, files: FileList) => files[i].arrayBuffer().then(buffer => buffer)
+const readFileInFileList = async (i: number, files: FileList): Promise<string> => {
+  const currentFileExtension = '.' + files[i].name.split('.').pop() as ImagesAcceptedTypes
+
+  if (ESPECIAL_ACCEPTED_EXT.includes(currentFileExtension))
+    return image2canvas(tiffArrayBufferToImageData(await files[i].arrayBuffer().then(buffer => buffer)))
+
+  if (ALL_ACCEPTED_EXT.includes(currentFileExtension))
+    return URL.createObjectURL(files[i]).toString()
+
+  console.log('file not supported' + files[i].name, 'bay extension not defied', 'in' + ALL_ACCEPTED_EXT.join(' '))
+}
 
 const image2canvas = (imageData: ImageData) => {
   const context = document.createElement('canvas').getContext('2d')
@@ -70,7 +82,7 @@ const image2canvas = (imageData: ImageData) => {
 
   context.putImageData(imageData, 0, 0)
 
-  return context.canvas
+  return context.canvas.toDataURL()
 }
 
 const tiffArrayBufferToImageData = buffer => {
@@ -81,4 +93,5 @@ const tiffArrayBufferToImageData = buffer => {
   return new ImageData(array, image.width, image.height)
 }
 
-export { readFilesUsingTauriProcess, bulkPromise, image2canvas, tiffArrayBufferToImageData }
+
+export { readFilesUsingTauriProcess, readFileInFileList, image2canvas, tiffArrayBufferToImageData }
