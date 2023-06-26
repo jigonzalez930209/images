@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes, CSSProperties, useState, useContext } from 'react'
 import { DraggableAttributes } from '@dnd-kit/core'
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities'
-import { GripVertical } from 'lucide-react'
+import { GripVertical, Edit2 } from 'lucide-react'
 
 import { IImage } from 'src/lib/interfaces'
 import { Button } from 'src/ui/button'
@@ -18,7 +18,7 @@ export type ItemProps = HTMLAttributes<HTMLDivElement> & {
 const Item = forwardRef<HTMLDivElement, ItemProps>(
   ({ id, withOpacity, isDragging, style, listeners, attributes, image, ...props }, ref) => {
     const [showHandles, setShowHandles] = useState(false)
-    const { setImageDialog } = useContext(ImagesContext)
+    const { setImageView, setImageEdit } = useContext(ImagesContext)
 
     const inlineStyles: CSSProperties = {
       opacity: withOpacity ? '0.5' : '1',
@@ -45,7 +45,13 @@ const Item = forwardRef<HTMLDivElement, ItemProps>(
       >
         {showHandles && (
           <div className='absolute left-0 top-2 flex w-full justify-between'>
-            <div></div>
+            <Button
+              variant='link'
+              className=' hover:cursor-pointer'
+              onClick={() => setImageEdit(image)}
+            >
+              <Edit2 className='h-7 w-7 rounded-md bg-background py-1' />
+            </Button>
             <Button
               variant='link'
               {...listeners}
@@ -63,7 +69,7 @@ const Item = forwardRef<HTMLDivElement, ItemProps>(
           src={image.image}
           alt={image.name}
           className='h-fit w-full rounded-sm object-cover'
-          onClick={() => setImageDialog(image)}
+          onClick={() => setImageView(image)}
         />
         <div>{image.name}</div>
       </div>
