@@ -16,7 +16,8 @@ export const INITIAL_STATE: IImagesState = {
   loading: false,
   progress: 0,
   columns: 2,
-  imageDialog: null,
+  imageView: null,
+  imageEdit: null,
 }
 
 interface props {
@@ -35,13 +36,11 @@ export const ImagesProvider = ({ children, initialState }: props) => {
   const setImagesState = (imagesState: IImagesState) =>
     dispatch({ type: 'setImagesState', payload: imagesState })
 
-  const setFile = (file: IImage) => dispatch({ type: 'setFile', payload: file })
+  const setImages = (images: IImage[]) => dispatch({ type: 'setImages', payload: images })
 
-  const setFiles = (files: IImage[]) => dispatch({ type: 'setFiles', payload: files })
+  const addImage = (image: IImage) => dispatch({ type: 'addImage', payload: image })
 
-  const addFile = (file: IImage) => dispatch({ type: 'addFile', payload: file })
-
-  const addFiles = (files: IImage[]) => dispatch({ type: 'addFiles', payload: files })
+  const addImages = (images: IImage[]) => dispatch({ type: 'addImages', payload: images })
 
   // const setSelectedFile = (selectedFile: IImage['id'][]) =>
   //   dispatch({ type: 'setSelectedFile', payload: selectedFile })
@@ -54,7 +53,11 @@ export const ImagesProvider = ({ children, initialState }: props) => {
 
   const setColumns = (columns: number) => dispatch({ type: 'setColumns', payload: columns })
 
-  const setImageDialog = (image: IImage) => dispatch({ type: 'setImageDialog', payload: image })
+  const setImageView = (image: IImage) => dispatch({ type: 'setImageView', payload: image })
+
+  const setImageEdit = (image: IImage) => dispatch({ type: 'setImageEdit', payload: image })
+
+  const updateImage = (image: IImage) => dispatch({ type: 'updateImage', payload: image })
 
   React.useEffect(() => {
     setImagesState(initialState)
@@ -64,14 +67,15 @@ export const ImagesProvider = ({ children, initialState }: props) => {
     <ImagesContext.Provider
       value={{
         imagesState,
-        setFiles,
-        setFile,
-        addFile,
-        addFiles,
-        setNotification,
+        setImages,
+        addImage,
+        addImages,
         setColumns,
+        setImageEdit,
+        updateImage,
+        setNotification,
         // setSelectedFile,
-        setImageDialog,
+        setImageView,
         setDrawerOpen,
         setPlatform,
         setProgress,

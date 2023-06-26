@@ -3,13 +3,14 @@ import { IImage, IImagesState, INotification, IPlatform } from '../interfaces'
 
 export type ImagesContextProps = {
   imagesState: IImagesState
-  setFiles: (files: IImage[]) => void
-  setFile: (file: IImage) => void
-  addFile: (file: IImage) => void
-  addFiles: (files: IImage[]) => void
+  setImages: (images: IImage[]) => void
+  addImage: (image: IImage) => void
+  addImages: (image: IImage[]) => void
+  updateImage: (image: IImage) => void
+  setImageView: (image: IImage) => void
+  setImageEdit: (image: IImage) => void
   setNotification: (notification: INotification) => void
   // setSelectedFile: (selectedFileType: IImage['id'][]) => void
-  setImageDialog: (image: IImage) => void
   setDrawerOpen: (open: boolean) => void
   setPlatform: (platform: IPlatform) => void
   setProgress: (progress: number) => void

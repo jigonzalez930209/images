@@ -2,19 +2,20 @@ import { IImage, IImagesState, INotification, IPlatform } from '../interfaces/in
 
 type ImagesAction = {
   type:
-    | 'setNotification'
-    | 'setImagesState'
-    | 'setPlatform'
-    | 'setFiles'
-    | 'setFile'
-    | 'setDrawerOpen'
-    | 'addFiles'
-    | 'addFile'
-    | 'setSelectedFile'
-    | 'setProgress'
-    | 'setLoading'
-    | 'setColumns'
-    | 'setImageDialog'
+  | 'setImagesState'
+  | 'setImages'
+  | 'addImages'
+  | 'addImage'
+  | 'updateImage'
+  | 'setImageView'
+  | 'setImageEdit'
+  | 'setNotification'
+  | 'setPlatform'
+  | 'setDrawerOpen'
+  | 'setSelectedFile'
+  | 'setProgress'
+  | 'setLoading'
+  | 'setColumns'
 
   payload: INotification | boolean | IPlatform | IImage | IImage[] | number | number[] | IImagesState | null
 }
@@ -26,7 +27,7 @@ export const imagesReducer = (state: IImagesState, action: ImagesAction): IImage
         ...state,
         notifications: action.payload as INotification,
       }
-    case 'setFiles':
+    case 'setImages':
       return {
         ...state,
         files: action.payload as IImage[],
@@ -43,34 +44,35 @@ export const imagesReducer = (state: IImagesState, action: ImagesAction): IImage
         platform: action.payload as 'web' | 'desktop',
       }
     }
-    case 'setFile': {
-      const file = action.payload as IImage
-      const files = state.files.map(f => (f.id === file.id ? file : f))
-      return {
-        ...state,
-        files,
-      }
-    }
     case 'setDrawerOpen': {
       return {
         ...state,
         drawerOpen: action.payload as boolean,
       }
     }
-    case 'addFiles': {
+    case 'addImages': {
       const files = action.payload as IImage[]
       return {
         ...state,
         files: [...state.files, ...files],
       }
     }
-    case 'addFile': {
+    case 'addImage': {
       const file = action.payload as IImage
       return {
         ...state,
         files: [...state.files, file],
       }
     }
+    case 'updateImage': {
+      const img = action.payload as IImage
+      const images = state.files.map(f => (f.id === img.id ? img : f))
+      return {
+        ...state,
+        files: images,
+      }
+    }
+
     // case 'setSelectedFile': {
     //   const id = action.payload as number
     //   const files = state.files.map(f => ({ ...f, selected: f.id === id }))
@@ -101,11 +103,19 @@ export const imagesReducer = (state: IImagesState, action: ImagesAction): IImage
         loading: action.payload as boolean,
       }
 
-    case 'setImageDialog':
+    case 'setImageView':
       return {
         ...state,
-        imageDialog: action.payload as IImage | null,
+        imageView: action.payload as IImage | null,
       }
+
+    case 'setImageEdit': {
+      return {
+        ...state,
+        imageEdit: action.payload as IImage | null,
+      }
+    }
+
     default:
       return state
   }
