@@ -3,15 +3,19 @@ import * as React from 'react'
 import { Progress } from 'src/ui/progress'
 import { RefProvider } from 'src/lib/context/RefContext'
 import InputsRef from 'src/support/inputs'
+import { ImagesContext } from 'src/lib/context/ImageContext'
 import { Menu } from '../support/menu'
 import useLoading from '../hooks/use-loading'
 import useProgress from '../hooks/use-progress'
 import Container from './dnd/Container'
+
 import DialogViewer from './viewer/DialogViewer'
+import Editor from './editor/Editor'
 
 const App = () => {
   const { progress } = useProgress()
   const { loading } = useLoading()
+  const { imagesState: { imageEdit } } = React.useContext(ImagesContext)
 
   document.body.removeAttribute('data-section')
   return (
@@ -29,7 +33,10 @@ const App = () => {
         <DialogViewer />
       </header>
       <main className='h-[93vh]  overflow-auto border-t bg-background pb-8 opacity-100 scrollbar scrollbar-track-transparent scrollbar-thumb-accent scrollbar-thumb-rounded-md'>
-        <Container />
+        {Boolean(imageEdit)
+          ? <Editor />
+          : <Container />
+        }
       </main>
     </div>
   )
