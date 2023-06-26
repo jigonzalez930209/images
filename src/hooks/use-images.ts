@@ -4,7 +4,7 @@ import * as React from 'react'
 import { readFileInFileList } from 'src/lib/utils/files'
 
 const useImages = () => {
-  const { imagesState, setFile, setFiles, addFile, addFiles, setLoading, setProgress } =
+  const { imagesState, setImages: setFiles, addImage: addFile, addImages: addFiles, setLoading, updateImage } =
     React.useContext(ImagesContext)
 
   const setImages = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,8 +79,7 @@ const useImages = () => {
     addImage,
     addImages,
     putImages: setFiles,
-    removeImage: setFile,
-    updateImage: setFile,
+    updateImage,
   }
 }
 
