@@ -19,8 +19,10 @@ const useImages = () => {
         const file = await readFileInFileList(i, files)
         images.push({
           id: (+new Date() * Math.random()).toString(36).substring(0, 6),
-          image: file,
+          image: file.src,
           name: files[i].name,
+          height: file.height,
+          width: file.width,
         })
         console.log(new Date().getTime() - t.getTime(), `ms to process ${files[i].name}`)
       })
@@ -40,8 +42,10 @@ const useImages = () => {
 
     addFile({
       id: (+new Date() * Math.random()).toString(36).substring(0, 6),
-      image: processFile,
+      image: processFile.src,
       name: files[0].name,
+      height: processFile.height,
+      width: processFile.width,
     })
 
     setLoading(false)
@@ -60,8 +64,10 @@ const useImages = () => {
         const file = await readFileInFileList(i, files)
         images.push({
           id: (+new Date() * Math.random()).toString(36).substring(0, 6),
-          image: file,
+          image: file.src,
           name: files[i].name,
+          height: file.height,
+          width: file.width,
         })
         console.log(new Date().getTime() - t.getTime(), `ms to process ${files[i].name}`)
       })

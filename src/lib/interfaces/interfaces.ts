@@ -25,6 +25,8 @@ export interface IImage {
   id: string
   name: string
   image: string
+  width: number
+  height: number
 }
 
 export type ImagesAcceptedTypes = '.png' | '.jpeg' | '.tiff' | '.bmp' | '.tif' | '.jpg'

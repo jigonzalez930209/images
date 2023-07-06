@@ -63,26 +63,56 @@ const readAllFiles = async (files: string[]) => {
   })
 }
 
-const readFileInFileList = async (i: number, files: FileList): Promise<string> => {
+const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result as string);
+  reader.onerror = reject;
+});
+
+const imgSize = (file: File): Promise<{ width: number, height: number }> => new Promise((resolve, reject) => {
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  img.onload = () => {
+    const { width, height } = img;
+    resolve({ width, height });
+  };
+  img.onerror = reject;
+});
+
+
+const readFileInFileList = async (i: number, files: FileList): Promise<{ src: string, width: number, height: number, }> => {
   const currentFileExtension = '.' + files[i].name.split('.').pop() as ImagesAcceptedTypes
 
   if (ESPECIAL_ACCEPTED_EXT.includes(currentFileExtension))
     return image2canvas(tiffArrayBufferToImageData(await files[i].arrayBuffer().then(buffer => buffer)))
 
-  if (ALL_ACCEPTED_EXT.includes(currentFileExtension))
-    return URL.createObjectURL(files[i]).toString()
+  if (ALL_ACCEPTED_EXT.includes(currentFileExtension)) {
+    const img = await imgSize(files[i])
+
+    return {
+      src: await toBase64(files[i]),
+      width: img.width,
+      height: img.height,
+    }
+
+  }
 
   console.log('file not supported' + files[i].name, 'bay extension not defied', 'in' + ALL_ACCEPTED_EXT.join(' '))
 }
 
-const image2canvas = (imageData: ImageData) => {
+const image2canvas = (imageData: ImageData): { src: string, width: number, height: number, } => {
   const context = document.createElement('canvas').getContext('2d')
   context.canvas.width = imageData.width
   context.canvas.height = imageData.height
 
   context.putImageData(imageData, 0, 0)
 
-  return context.canvas.toDataURL()
+  return {
+    src: context.canvas.toDataURL(),
+    width: imageData.width,
+    height: imageData.height,
+  }
 }
 
 const tiffArrayBufferToImageData = buffer => {
