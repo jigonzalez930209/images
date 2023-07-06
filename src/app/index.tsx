@@ -10,21 +10,17 @@ import useProgress from '../hooks/use-progress'
 import Container from './dnd/Container'
 
 import DialogViewer from './viewer/DialogViewer'
-import Editor from './editor/Editor'
+import Editor from './editor'
+import Loader from 'src/lib/components/Loader/Loader'
 
 const App = () => {
-  const { progress } = useProgress()
   const { loading } = useLoading()
-  const { imagesState: { imageEdit } } = React.useContext(ImagesContext)
+  const { imagesState: { imageEdit, files } } = React.useContext(ImagesContext)
 
   document.body.removeAttribute('data-section')
   return (
     <div className='overflow-none bg-transparent font-sans antialiased scrollbar-none'>
-      {loading && (
-        <div className='absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 '>
-          <Progress className='w-1/3' value={progress}></Progress>
-        </div>
-      )}
+      {loading && <Loader />}
       <header className='overflow-none z-20 w-full bg-background'>
         <RefProvider>
           <Menu />
