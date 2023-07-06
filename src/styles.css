@@ -122,3 +122,26 @@ body[style*='pointer-events: none'] .overflow-x-auto {
     @apply px-4;
   }
 }
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10vh;
+  height: 10vh;
+  margin-top: -5vh;
+  margin-left: -5vh;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-top-color: #07d;
+  border-bottom-color: #07d;
+  animation: spinner 0.8s ease infinite;
+}
