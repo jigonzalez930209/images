@@ -1,7 +1,6 @@
-
-import * as Dialog from '@radix-ui/react-dialog';
-import { X } from 'lucide-react';
-import React, { PropsWithChildren } from 'react';
+import * as Dialog from '@radix-ui/react-dialog'
+import { X } from 'lucide-react'
+import React, { PropsWithChildren } from 'react'
 
 type DialogProps = PropsWithChildren & {
   open: boolean
@@ -9,11 +8,9 @@ type DialogProps = PropsWithChildren & {
 }
 
 const DialogWrapper = ({ open, onOpenChange, children }: DialogProps) => {
-
-
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      <Dialog.Portal className='min-h-max w-3/4'>
+      <Dialog.Portal className='min-h-max w-5/6'>
         <div className='fixed inset-0 z-0 flex items-start justify-center sm:items-center'>
           <Dialog.Overlay className='fixed inset-0 z-0 bg-background/80 backdrop-blur-sm transition-all duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in' />
           <Dialog.Content className='fixed flex items-center justify-center z-0 w-5/6  gap-4 rounded-b-lg border bg-background p-6 shadow-lg animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 data-[state=open]:sm:slide-in-from-bottom-0'>

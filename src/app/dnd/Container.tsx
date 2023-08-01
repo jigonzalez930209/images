@@ -30,17 +30,17 @@ const Container = () => {
 
   const handleDragStart = useCallback(
     (event: DragStartEvent) => {
-      setActiveId(images.find(i => i.id === event.active.id))
+      setActiveId(images.find((i) => i.id === event.active.id))
     },
-    [images]
+    [images],
   )
   const handleDragEnd = useCallback(
     (event: DragEndEvent) => {
       const { active, over } = event
 
       if (active.id !== over?.id) {
-        const oldIndex = images.findIndex(img => img.id === active.id)
-        const newIndex = images.findIndex(img => img.id === over!.id)
+        const oldIndex = images.findIndex((img) => img.id === active.id)
+        const newIndex = images.findIndex((img) => img.id === over!.id)
         const newImages = arrayMove<IImage>(images, oldIndex, newIndex)
 
         putImages(newImages)
@@ -48,7 +48,7 @@ const Container = () => {
 
       setActiveId(null)
     },
-    [images]
+    [images],
   )
   const handleDragCancel = useCallback(() => {
     setActiveId(null)
@@ -69,12 +69,10 @@ const Container = () => {
               'overflow-auto border-t bg-background',
               'scrollbar-none',
               ImagesGridColumns[imagesState.columns],
-              'grid gap-5 scrollbar scrollbar-track-transparent scrollbar-thumb-accent scrollbar-thumb-rounded-md'
+              'grid gap-5 scrollbar scrollbar-track-transparent scrollbar-thumb-accent scrollbar-thumb-rounded-md',
             )}
           >
-            {images?.map(img => (
-              <SortableItem key={img?.id} image={img} />
-            ))}
+            {images?.map((img) => <SortableItem key={img?.id} image={img} />)}
           </div>
         </SortableContext>
         <DragOverlay adjustScale style={{ transformOrigin: '0 0 ' }}>

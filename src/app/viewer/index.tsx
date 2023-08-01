@@ -1,2 +1,2 @@
 export { default } from './DialogViewer'
-export * as Viewer from './Viewer'
+export * as Viewer from './ViewerContainer'

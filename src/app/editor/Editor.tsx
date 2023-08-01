@@ -1,8 +1,5 @@
 import * as React from 'react'
-import FilerobotImageEditor, {
-  TABS,
-  TOOLS,
-} from 'react-filerobot-image-editor'
+import FilerobotImageEditor, { TABS, TOOLS } from 'react-filerobot-image-editor'
 
 import { ColorsMap } from '@scaleflex/ui/theme/roots/palette/entity/colors-map'
 import { Theme } from '@scaleflex/ui/theme'
@@ -10,47 +7,51 @@ import { Theme } from '@scaleflex/ui/theme'
 import { ImagesContext } from 'src/lib/context/ImageContext'
 
 const palette: ColorsMap = {
-  "txt-primary": '',
-  "txt-primary-invert": '',
-  "txt-secondary": '',
-  "txt-secondary-invert": '',
-  "txt-placeholder": '',
-  "accent-primary": 'black',
-  "accent-primary-hover": '',
-  "accent-primary-active": '',
-  "accent-primary-disabled": '',
-  "bg-primary": 'black',
-  "bg-primary-hover": '',
-  "bg-primary-active": '',
-  "bg-primary-0-5-opacity": '',
-  "bg-secondary": 'black',
-  "icons-primary": 'blue',
-  "icons-primary-opacity-0-6": '5',
-  "icons-secondary": 'blue',
-  "icons-placeholder": 'gray',
-  "btn-primary-text": '',
-  "btn-disabled-text": '',
-  "link-primary": '',
-  "link-hover": '',
-  "link-active": '',
-  "borders-primary": '',
-  "borders-secondary": '',
-  "borders-strong": '',
-  "borders-invert": '',
-  "border-active-bottom": '',
-  "active-secondary": '',
-  "active-secondary-hover": '',
-  "active-secondary-active": '',
-  "tag": '',
-  "error": '',
-  "success": '',
-  "info": '',
-  "light-shadow": '',
-  'warning': ''
+  'txt-primary': '',
+  'txt-primary-invert': '',
+  'txt-secondary': '',
+  'txt-secondary-invert': '',
+  'txt-placeholder': '',
+  'accent-primary': 'black',
+  'accent-primary-hover': '',
+  'accent-primary-active': '',
+  'accent-primary-disabled': '',
+  'bg-primary': 'black',
+  'bg-primary-hover': '',
+  'bg-primary-active': '',
+  'bg-primary-0-5-opacity': '',
+  'bg-secondary': 'black',
+  'icons-primary': 'blue',
+  'icons-primary-opacity-0-6': '5',
+  'icons-secondary': 'blue',
+  'icons-placeholder': 'gray',
+  'btn-primary-text': '',
+  'btn-disabled-text': '',
+  'link-primary': '',
+  'link-hover': '',
+  'link-active': '',
+  'borders-primary': '',
+  'borders-secondary': '',
+  'borders-strong': '',
+  'borders-invert': '',
+  'border-active-bottom': '',
+  'active-secondary': '',
+  'active-secondary-hover': '',
+  'active-secondary-active': '',
+  tag: '',
+  error: '',
+  success: '',
+  info: '',
+  'light-shadow': '',
+  warning: '',
 }
 
 const Editor = () => {
-  const { imagesState: { imageEdit }, setImageEdit, updateImage } = React.useContext(ImagesContext)
+  const {
+    imagesState: { imageEdit },
+    setImageEdit,
+    updateImage,
+  } = React.useContext(ImagesContext)
 
   return (
     <div className='w-full h-full'>
@@ -117,13 +118,22 @@ const Editor = () => {
             ],
           }}
           defaultSavedImageQuality={1}
-          tabsIds={[TABS.FINETUNE, TABS.FILTERS, TABS.RESIZE, TABS.ADJUST, TABS.ANNOTATE, TABS.WATERMARK,]} // or {['Adjust', 'Annotate', 'Watermark']}
+          tabsIds={[
+            TABS.FINETUNE,
+            TABS.FILTERS,
+            TABS.RESIZE,
+            TABS.ADJUST,
+            TABS.ANNOTATE,
+            TABS.WATERMARK,
+          ]} // or {['Adjust', 'Annotate', 'Watermark']}
           defaultTabId={TABS.FINETUNE}
           defaultToolId={TOOLS.NOISE}
           forceToPngInEllipticalCrop
-          theme={{
-            palette: palette,
-          } as Pick<Theme, 'palette' | 'breakpoints' | 'shape' | 'typography'>}
+          theme={
+            {
+              palette: palette,
+            } as Pick<Theme, 'palette' | 'breakpoints' | 'shape' | 'typography'>
+          }
         />
       )}
     </div>

@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </ToastProvider>
       </ThemeProvider>
     </ImagesProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 )

@@ -13,7 +13,9 @@ const AlertDialogPortal = ({
   ...props
 }: AlertDialogPrimitive.AlertDialogPortalProps) => (
   <AlertDialogPrimitive.Portal className={cn(className)} {...props}>
-    <div className='fixed inset-0 z-50 flex items-end justify-center sm:items-center'>{children}</div>
+    <div className='fixed inset-0 z-50 flex items-end justify-center sm:items-center'>
+      {children}
+    </div>
   </AlertDialogPrimitive.Portal>
 )
 AlertDialogPortal.displayName = AlertDialogPrimitive.Portal.displayName
@@ -25,7 +27,7 @@ const AlertDialogOverlay = React.forwardRef<
   <AlertDialogPrimitive.Overlay
     className={cn(
       'fixed inset-0 z-50 bg-background/80 backdrop-blur-sm transition-opacity animate-in fade-in',
-      className
+      className,
     )}
     {...props}
     ref={ref}
@@ -43,7 +45,7 @@ const AlertDialogContent = React.forwardRef<
       ref={ref}
       className={cn(
         'fixed z-50 grid w-full max-w-lg scale-100 gap-4 border bg-background p-6 opacity-100 shadow-lg animate-in fade-in-90 slide-in-from-bottom-10 sm:rounded-lg sm:zoom-in-90 sm:slide-in-from-bottom-0 md:w-full',
-        className
+        className,
       )}
       {...props}
     />
@@ -68,7 +70,11 @@ const AlertDialogTitle = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Title ref={ref} className={cn('text-lg font-semibold', className)} {...props} />
+  <AlertDialogPrimitive.Title
+    ref={ref}
+    className={cn('text-lg font-semibold', className)}
+    {...props}
+  />
 ))
 AlertDialogTitle.displayName = AlertDialogPrimitive.Title.displayName
 

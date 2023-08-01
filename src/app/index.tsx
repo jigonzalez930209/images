@@ -15,7 +15,9 @@ import Loader from 'src/lib/components/Loader/Loader'
 
 const App = () => {
   const { loading } = useLoading()
-  const { imagesState: { imageEdit, files } } = React.useContext(ImagesContext)
+  const {
+    imagesState: { imageEdit, files },
+  } = React.useContext(ImagesContext)
 
   document.body.removeAttribute('data-section')
   return (
@@ -29,10 +31,7 @@ const App = () => {
         <DialogViewer />
       </header>
       <main className='h-[93vh]  overflow-auto border-t bg-background pb-8 opacity-100 scrollbar scrollbar-track-transparent scrollbar-thumb-accent scrollbar-thumb-rounded-md'>
-        {Boolean(imageEdit)
-          ? <Editor />
-          : <Container />
-        }
+        {imageEdit ? <Editor /> : <Container />}
       </main>
     </div>
   )

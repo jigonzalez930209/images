@@ -26,7 +26,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     className={cn(
       'data-[state=open]:bg-accent data-[state=open]:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none',
       inset && 'pl-8',
-      className
+      className,
     )}
     {...props}
   >
@@ -44,7 +44,7 @@ const ContextMenuSubContent = React.forwardRef<
     ref={ref}
     className={cn(
       'bg-popover text-popover-foreground animate-in slide-in-from-left-1 z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-md',
-      className
+      className,
     )}
     {...props}
   />
@@ -60,7 +60,7 @@ const ContextMenuContent = React.forwardRef<
       ref={ref}
       className={cn(
         'bg-popover text-popover-foreground animate-in fade-in-80 z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-md',
-        className
+        className,
       )}
       {...props}
     />
@@ -79,7 +79,7 @@ const ContextMenuItem = React.forwardRef<
     className={cn(
       'focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       inset && 'pl-8',
-      className
+      className,
     )}
     {...props}
   />
@@ -94,7 +94,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
     ref={ref}
     className={cn(
       'focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      className
+      className,
     )}
     checked={checked}
     {...props}
@@ -117,7 +117,7 @@ const ContextMenuRadioItem = React.forwardRef<
     ref={ref}
     className={cn(
       'focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      className
+      className,
     )}
     {...props}
   >
@@ -159,7 +159,10 @@ ContextMenuSeparator.displayName = ContextMenuPrimitive.Separator.displayName
 
 const ContextMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
-    <span className={cn('text-muted-foreground ml-auto text-xs tracking-widest', className)} {...props} />
+    <span
+      className={cn('text-muted-foreground ml-auto text-xs tracking-widest', className)}
+      {...props}
+    />
   )
 }
 ContextMenuShortcut.displayName = 'ContextMenuShortcut'

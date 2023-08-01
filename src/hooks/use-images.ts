@@ -4,12 +4,18 @@ import * as React from 'react'
 import { readFileInFileList } from 'src/lib/utils/files'
 
 const useImages = () => {
-  const { imagesState, setImages: setFiles, addImage: addFile, addImages: addFiles, setLoading, updateImage } =
-    React.useContext(ImagesContext)
+  const {
+    imagesState,
+    setImages: setFiles,
+    addImage: addFile,
+    addImages: addFiles,
+    setLoading,
+    updateImage,
+  } = React.useContext(ImagesContext)
 
   const setImages = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true)
-    let files = e.currentTarget.files
+    const files = e.currentTarget.files
     const s = Date.now()
     const images: IImage[] = []
 
@@ -25,7 +31,7 @@ const useImages = () => {
           width: file.width,
         })
         console.log(new Date().getTime() - t.getTime(), `ms to process ${files[i].name}`)
-      })
+      }),
     )
     console.log(Date.now() - s, 'ms all read time')
 
@@ -36,7 +42,7 @@ const useImages = () => {
 
   const addImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true)
-    let files = e.currentTarget.files
+    const files = e.currentTarget.files
 
     const processFile = await readFileInFileList(0, files)
 
@@ -54,7 +60,7 @@ const useImages = () => {
 
   const addImages = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true)
-    let files = e.currentTarget.files
+    const files = e.currentTarget.files
     const s = Date.now()
     const images: IImage[] = []
 
@@ -70,7 +76,7 @@ const useImages = () => {
           width: file.width,
         })
         console.log(new Date().getTime() - t.getTime(), `ms to process ${files[i].name}`)
-      })
+      }),
     )
     console.log(Date.now() - s, 'ms all read time')
 

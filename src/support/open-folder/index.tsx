@@ -26,7 +26,7 @@ const ImagesFiles = () => {
       <MenubarItem onClick={addOneFile}>
         Add one <MenubarShortcut>⌘A</MenubarShortcut>
       </MenubarItem>
-      <MenubarItem disabled={!Boolean(images.length)} onClick={addFiles}>
+      <MenubarItem disabled={!images.length} onClick={addFiles}>
         Add files <MenubarShortcut>⇧⌘A</MenubarShortcut>
       </MenubarItem>
       <MenubarItem onClick={openFolder}>

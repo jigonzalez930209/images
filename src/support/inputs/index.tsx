@@ -61,7 +61,12 @@ const InputsRef = () => {
         type='file'
         onChange={handleOpenFolder}
       />
-      <input id='open-file' accept={ALL_ACCEPTED_EXT.join(', ')} type='file' onChange={handleAddImage} />
+      <input
+        id='open-file'
+        accept={ALL_ACCEPTED_EXT.join(', ')}
+        type='file'
+        onChange={handleAddImage}
+      />
       <input
         id='open-many'
         multiple

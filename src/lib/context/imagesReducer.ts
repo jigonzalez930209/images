@@ -2,22 +2,31 @@ import { IImage, IImagesState, INotification, IPlatform } from '../interfaces/in
 
 type ImagesAction = {
   type:
-  | 'setImagesState'
-  | 'setImages'
-  | 'addImages'
-  | 'addImage'
-  | 'updateImage'
-  | 'setImageView'
-  | 'setImageEdit'
-  | 'setNotification'
-  | 'setPlatform'
-  | 'setDrawerOpen'
-  | 'setSelectedFile'
-  | 'setProgress'
-  | 'setLoading'
-  | 'setColumns'
+    | 'setImagesState'
+    | 'setImages'
+    | 'addImages'
+    | 'addImage'
+    | 'updateImage'
+    | 'setImageView'
+    | 'setImageEdit'
+    | 'setNotification'
+    | 'setPlatform'
+    | 'setDrawerOpen'
+    | 'setSelectedFile'
+    | 'setProgress'
+    | 'setLoading'
+    | 'setColumns'
 
-  payload: INotification | boolean | IPlatform | IImage | IImage[] | number | number[] | IImagesState | null
+  payload:
+    | INotification
+    | boolean
+    | IPlatform
+    | IImage
+    | IImage[]
+    | number
+    | number[]
+    | IImagesState
+    | null
 }
 
 export const imagesReducer = (state: IImagesState, action: ImagesAction): IImagesState => {
@@ -66,7 +75,7 @@ export const imagesReducer = (state: IImagesState, action: ImagesAction): IImage
     }
     case 'updateImage': {
       const img = action.payload as IImage
-      const images = state.files.map(f => (f.id === img.id ? img : f))
+      const images = state.files.map((f) => (f.id === img.id ? img : f))
       return {
         ...state,
         files: images,

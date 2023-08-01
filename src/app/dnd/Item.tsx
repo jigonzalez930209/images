@@ -74,7 +74,7 @@ const Item = forwardRef<HTMLDivElement, ItemProps>(
         <div>{image.name}</div>
       </div>
     )
-  }
+  },
 )
 
 export default Item

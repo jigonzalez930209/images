@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities'
 
 import Item, { ItemProps } from './Item'
 
-const SortableItem: FC<ItemProps> = props => {
+const SortableItem: FC<ItemProps> = (props) => {
   const { isDragging, attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: props.image.id,
   })
