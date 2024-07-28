@@ -1,6 +1,6 @@
 [package]
 name = "images"
-version = "0.2.0"
+version = "0.2.1"
 description = "Images Viewer and Comparer"
 authors = ["Jose Ivan Gonzalez Jorge <jigonzalez930209@gmail.com> "]
 license = "MIT"
