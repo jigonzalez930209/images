@@ -1,3 +1,6 @@
+import { FileImage, Maximize, X } from 'lucide-react'
+import { useCallback, useContext } from 'react'
+import { ImagesContext } from 'src/lib/context/ImageContext'
 import { Button } from '../ui/button'
 import {
   Menubar,
@@ -11,37 +14,34 @@ import {
   MenubarShortcut,
   MenubarTrigger,
 } from '../ui/menubar'
-import { FileImage, Maximize, X } from 'lucide-react'
-import { useCallback, useContext } from 'react'
 import { Icons } from './icons'
 import { MenuModeToggle } from './menu-mode-toggle'
 import ImagesFiles from './open-folder'
-import { ImagesContext } from 'src/lib/context/ImageContext'
 
 export function Menu() {
   const { imagesState, setColumns } = useContext(ImagesContext)
 
   const minimizeWindow = useCallback(async () => {
-    const { appWindow } = await import('@tauri-apps/plugin-window')
+    const { getCurrent } = await import('@tauri-apps/plugin-window')
 
-    appWindow?.minimize()
+    getCurrent()?.minimize()
   }, [])
 
   const maximizeWindow = useCallback(async () => {
-    const { appWindow } = await import('@tauri-apps/plugin-window')
-    const isMaximized = await appWindow?.isMaximized()
+    const { getCurrent } = await import('@tauri-apps/plugin-window')
+    const isMaximized = await getCurrent()?.isMaximized()
 
     if (isMaximized) {
-      appWindow?.unmaximize()
+      getCurrent()?.unmaximize()
     } else {
-      appWindow?.maximize()
+      getCurrent()?.maximize()
     }
   }, [])
 
   const closeWindow = useCallback(async () => {
-    const { appWindow } = await import('@tauri-apps/plugin-window')
+    const { getCurrent } = await import('@tauri-apps/plugin-window')
 
-    appWindow.close()
+    getCurrent().close()
   }, [])
 
   return (

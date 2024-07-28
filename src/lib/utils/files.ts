@@ -1,8 +1,8 @@
-import { open, save } from '@tauri-apps/plugin-dialog'
-import { readBinaryFile, readTextFile } from '@tauri-apps/plugin-fs'
+import { open } from '@tauri-apps/plugin-dialog'
+import { readFile } from '@tauri-apps/plugin-fs'
 import UTIF from 'utif'
-import { ALL_ACCEPTED_EXT, ESPECIAL_ACCEPTED_EXT } from './const'
 import { ImagesAcceptedTypes } from '../interfaces/interfaces'
+import { ALL_ACCEPTED_EXT, ESPECIAL_ACCEPTED_EXT } from './const'
 
 const readFilesUsingTauriProcess = async () => {
   const selected = await open({
@@ -30,7 +30,7 @@ const readFilesUsingTauriProcess = async () => {
 const readAllFiles = async (files: string[]) => {
   const readFiles = Promise.all(
     files.map(file => {
-      const fileData = readBinaryFile(file)
+      const fileData = readFile(file)
       return fileData
     })
   )
@@ -64,15 +64,18 @@ const readAllFiles = async (files: string[]) => {
 }
 
 const readFileInFileList = async (i: number, files: FileList): Promise<string> => {
-  const currentFileExtension = '.' + files[i].name.split('.').pop() as ImagesAcceptedTypes
+  const currentFileExtension = ('.' + files[i].name.split('.').pop()) as ImagesAcceptedTypes
 
   if (ESPECIAL_ACCEPTED_EXT.includes(currentFileExtension))
     return image2canvas(tiffArrayBufferToImageData(await files[i].arrayBuffer().then(buffer => buffer)))
 
-  if (ALL_ACCEPTED_EXT.includes(currentFileExtension))
-    return URL.createObjectURL(files[i]).toString()
+  if (ALL_ACCEPTED_EXT.includes(currentFileExtension)) return URL.createObjectURL(files[i]).toString()
 
-  console.log('file not supported' + files[i].name, 'bay extension not defied', 'in' + ALL_ACCEPTED_EXT.join(' '))
+  console.log(
+    'file not supported' + files[i].name,
+    'bay extension not defied',
+    'in' + ALL_ACCEPTED_EXT.join(' ')
+  )
 }
 
 const image2canvas = (imageData: ImageData) => {
@@ -93,5 +96,4 @@ const tiffArrayBufferToImageData = buffer => {
   return new ImageData(array, image.width, image.height)
 }
 
-
-export { readFilesUsingTauriProcess, readFileInFileList, image2canvas, tiffArrayBufferToImageData }
+export { image2canvas, readFileInFileList, readFilesUsingTauriProcess, tiffArrayBufferToImageData }
